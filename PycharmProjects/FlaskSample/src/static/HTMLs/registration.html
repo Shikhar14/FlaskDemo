@@ -1,0 +1,141 @@
+
+<div class="container well col-md-8" style="margin: 0 auto; float: none" ng-controller="registerCtrl">
+<form id="Users">
+    <div class="col-md-12 form-group">
+        <div class="col-md-3"></div>
+    <div class="col-md-4 col-sm-4">
+        <h2>REGISTRATION</h2></div>
+        </div>
+<div class="col-md-12 form-group">
+        <div class="col-md-3"></div>
+    <div class="col-md-6 col-sm-6">
+       <div class="col-md-4 col-sm-4">First Name</div>
+        <div class="col-md-8 col-sm-8"><input type="text" name="fname" class="form-control" ng-model="fname"/> </div>
+    </div>
+        </div>
+    <div class="col-md-12 form-group">
+        <div class="col-md-3"></div>
+    <div class="col-md-6 col-sm-6">
+       <div class="col-md-4 col-sm-4">Last Name</div>
+        <div class="col-md-8 col-sm-8"><input type="text" name="lname" class="form-control" ng-model="lname"/> </div>
+    </div>
+        </div>
+    <div class="col-md-12 form-group">
+        <div class="col-md-3"></div>
+    <div class="col-md-6 col-sm-6">
+       <div class="col-md-4 col-sm-4">Email</div>
+        <div class="col-md-8 col-sm-8"><input type="text" name="email" class="form-control" ng-model="register.email"/> </div>
+    </div>
+        </div>
+<div class="col-md-12 form-group">
+        <div class="col-md-3"></div>
+    <div class="col-md-6 col-sm-6">
+       <div class="col-md-4 col-sm-4">Password</div>
+        <div class="col-md-8 col-sm-8"><input type="password" name="password" class="form-control" ng-model="register.password"/> </div>
+    </div>
+        </div>
+    <div class="col-md-12 form-group">
+        <div class="col-md-3"></div>
+    <div class="col-md-6 col-sm-6">
+       <div class="col-md-4 col-sm-4">Confirm Password</div>
+        <div class="col-md-8 col-sm-8"><input type="password" name="confirmPassword" class="form-control" ng-model="cpassword"/> </div>
+    </div>
+        </div>
+     <div class="col-md-12">
+        <div class="col-md-3"></div>
+    <div class="col-md-4 col-sm-4">
+       <label class="text-danger">{{ reply }}</label>
+    </div>
+        <div class="col-md-4 col-sm-4">
+        </div></div>
+    <div class="col-md-12 ">
+        <div class="col-md-3"></div>
+    <div class="col-md-6 col-sm-6 form-group">
+        <div class="col-md-4 col-sm-4"></div>
+        <div class="col-md-8 col-sm-8"><button id="submit" class="btn btn-primary" ng-click="registration()">Submit</button>
+            <button class="btn btn-primary" ng-click="reset()">Reset</button> </div>
+    </div>
+    </div>
+    <div class="col-md-12">
+        <div class="col-md-3"></div>
+    <div class="col-md-4 col-sm-4">
+       <a ui-sref="login" ui-sref-active="active">Already Registered? Login</a>
+    </div>
+        <div class="col-md-4 col-sm-4">
+        </div></div>
+</form>
+</div>
+
+<script>
+    $(document).ready(function () {
+    $("#submit").click(function () {
+        $('#Users').bootstrapValidator('validate');
+    });
+    ValidateIt();
+});
+
+    function ValidateIt() {
+    var validator = $("#Users").bootstrapValidator({
+        feedbackIcons: {
+            valid: "glyphicon glyphicon-ok",
+            invalid: "glyphicon glyphicon-remove",
+            validating: "glyphicon glyphicon-refresh"
+        },
+        fields: {
+            fname: {
+                message: "First Name Required",
+                validators: {
+                    notEmpty: {
+                        message: "Please Provide First Name"
+                    }
+                }
+            },
+            lname: {
+                message: "Last Name Required",
+                validators: {
+                    notEmpty: {
+                        message: "Please Provide Last Name"
+                    }
+                }
+            },
+            email: {
+                message: "Email address is required",
+                validators: {
+                    notEmpty: {
+                        message: "Please provide Email address"
+                    },
+                    emailAddress: {
+                        message: "Email address is invalid"
+                    }
+                }
+            },
+            password: {
+                validators: {
+                    notEmpty: {
+                        message: "Password is required"
+                    },
+                    stringLength: {
+                        min: 6,
+                        message: "Password must be at least 6 characters long"
+                    },
+                    different: {
+                        field: "email",
+                        message: "Email and Password cannot match"
+                    }
+                }
+            },
+            confirmPassword: {
+                validators: {
+                    notEmpty: {
+                        message: "Confirm Password is required"
+                    },
+                    identical: {
+                        field: "password",
+                        message: "Password and Confirmation Password must match"
+                    }
+                }
+            }
+        }
+    });
+}
+</script>
